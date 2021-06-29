@@ -4,30 +4,35 @@ import {
     CardMedia, CssBaseline, Grid, Toolbar, Container, Button,
 } from '@material-ui/core';
 import { PhotoCamera } from '@material-ui/icons';
+import useStyles from './styles';
+
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function App() {
+    const classes = useStyles();
+
     return (
         <>
             <CssBaseline />
             <AppBar position="relative">
                 <Toolbar>
-                    <PhotoCamera />
+                    <PhotoCamera className={classes.icon} />
                     <Typography variant="h6">
                         Photo Album
                     </Typography>
                 </Toolbar>
             </AppBar>
             <main>
-                <div>
-                    <Container maxWidth="sm" style={{ marginTop: '100px'}}>
-                        <Typography variant="h2" align="center" color="textPrimary" gutterbottom>
+                <div className={classes.container}>
+                    <Container maxWidth="sm">
+                        <Typography variant="h2" align="center" color="textPrimary" gutterbottom="true">
                             Photo Album
                         </Typography>
                         <Typography variant="h5" align="center" color="textSecondary" paragraph>
                             Hello every one this is a photo album and I wanna try to make this as long as possible so we could see how to it's gonna look like
                         </Typography>
                     </Container>
-                    <div>
+                    <div className={classes.buttons}>
                         <Grid container spacing={2} justify="center">
                             <Grid item>
                                 <Button variant="contained" color="primary">
@@ -42,8 +47,44 @@ function App() {
                         </Grid>
                     </div>
                 </div>
-            </main>
+                <Container className={classes.cardGrid} maxWidth="md">
+                    <Grid container spacing={4}>
+                        {cards.map((card) => (
+                            <Grid item key={card} xm={12} sm={6} md={3}>
+                                <Card className={classes.card}>
+                                    <CardMedia
+                                        className={classes.cardMedia}
+                                        image="https://source.unsplash.com/random"
+                                        title="Image Title"
+                                    />
+                                    <CardContent className={classes.cardContent}>
+                                        <Typography gutterBottom="true" variant="h5">
+                                            Heading
+                                    </Typography>
+                                        <Typography>
+                                            This is a media card. You can use this section to describe the content
+                                    </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button size="small" color="primary">View</Button>
+                                        <Button size="small" color="primary">Edit</Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        ))}
 
+                    </Grid>
+
+                </Container>
+            </main>
+            <footer className={classes.footer}>
+                <Typography variant="h6" align="center" gutterButtom="true">
+                    Footer
+                </Typography>
+                <Typography variant="subtitle1" align="center" color="primary">
+                    Something here to give the footer a purpose!
+                </Typography>
+            </footer>
         </>
     );
 }
